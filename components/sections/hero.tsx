@@ -1,14 +1,14 @@
 'use client';
 
 import { useRef } from 'react';
-import { ArrowRight, ArrowDown, Github, Linkedin, Twitter, Mail, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowDown, GitBranch, Link, MailBadgeIcon, Mail, Sparkles } from 'lucide-react';
 import { registerGsap } from '@/lib/gsap';
 import { usePrefersReducedMotion, useIsomorphicLayoutEffect } from '@/lib/hooks';
 import { profile } from '@/data/profile';
 import { Scene } from '@/components/three/scene';
 import { MagneticButton } from '@/components/shared/magnetic-button';
 
-const socialIcons: Record<string, any> = { Github, Linkedin, Twitter, Mail };
+const socialIcons: Record<string, any> = { GitBranch, Link, MailBadgeIcon, Mail };
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);

@@ -53,7 +53,7 @@ export function CustomCursor() {
   if (!enabled) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[100] hidden lg:block" aria-hidden="true">
+    <div className="pointer-events-none fixed inset-0 z-100 hidden lg:block" aria-hidden="true">
       <div
         ref={dotRef}
         className="absolute left-0 top-0 h-1.5 w-1.5 rounded-full bg-brand"

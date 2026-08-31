@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
-import { ProjectCard } from './project-card';
+import { ProjectCard } from './projects-card';
 import { StaggerGroup } from '@/components/shared/reveal';
 import { projects, projectCategories } from '@/data/projects';
 import { cn } from '@/lib/utils';

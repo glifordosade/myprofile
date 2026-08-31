@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from 'lucide-react';
+import { GitBranchIcon, LinkIcon, MailBadgeIcon, Mail, ArrowUpRight } from 'lucide-react';
 import { profile } from '@/data/profile';
 import { navItems } from '@/data/navigation';
 
-const socialIcons: Record<string, any> = { Github, Linkedin, Twitter, Mail };
+const socialIcons: Record<string, any> = { GitBranchIcon, LinkIcon, MailBadgeIcon, Mail };
 
 export function Footer() {
   return (

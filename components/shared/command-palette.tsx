@@ -23,13 +23,13 @@ import {
   Moon,
   Newspaper,
   Sun,
-  Github,
-  Linkedin,
-  Twitter,
+  GitBranch,
+  LinkIcon,
+  MailBadgeIcon,
   Mail,
 } from 'lucide-react';
 
-const socialIcons: Record<string, any> = { Github, Linkedin, Twitter, Mail };
+const socialIcons: Record<string, any> = { GitBranch, LinkIcon, MailBadgeIcon, Mail };
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
