@@ -1,0 +1,134 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { EXPERIENCES } from '@/data/portfolioData';
+import { Badge } from '@/components/ui/Badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { ArrowLeft, Briefcase, Users, Calendar, MapPin, CheckCircle2, Tag } from 'lucide-react';
+
+export function getStaticPaths() {
+  return EXPERIENCES.map((exp) => ({
+    params: { id: exp.id },
+    props: { experience: exp },
+  }));
+}
+
+const { experience: exp } = Astro.props;
+---
+
+<Layout
+  title={`${exp.role} at ${exp.company} | Muhammad Zhafarul Maahiy`}
+  description={exp.synopsis}
+>
+  <div class="min-h-screen pt-24 pb-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Back button */}
+      <div class="mb-8">
+        <a
+          href="/experience"
+          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-mono group"
+        >
+          <ArrowLeft strokeWidth={1.5} className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
+          Kembali ke Professional Experience
+        </a>
+      </div>
+
+      {/* Header */}
+      <div class="mb-12">
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <Badge
+            variant={exp.type === "Work" ? "primary" : "secondary"}
+            class="text-xs"
+          >
+            {exp.type === "Work" ? (
+              <Briefcase strokeWidth={1.5} className="h-3 w-3" />
+            ) : (
+              <Users strokeWidth={1.5} className="h-3 w-3" />
+            )}
+            {exp.type}
+          </Badge>
+          {exp.featured && <Badge variant="muted" class="text-xs">Featured</Badge>}
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono text-foreground mb-2 leading-tight">
+          {exp.role}
+        </h1>
+        <p class="text-xl sm:text-2xl text-primary font-semibold mb-4">{exp.company}</p>
+
+        <div class="flex flex-wrap gap-4 text-sm text-muted-foreground">
+          <span class="flex items-center gap-1.5">
+            <Calendar strokeWidth={1.5} className="h-4 w-4 text-primary" />
+            {exp.period}
+          </span>
+          <span class="flex items-center gap-1.5">
+            <MapPin strokeWidth={1.5} className="h-4 w-4 text-primary" />
+            {exp.location}
+          </span>
+        </div>
+      </div>
+
+      {/* Role Overview & Responsibilities */}
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold font-mono text-foreground mb-4 flex items-center gap-2">
+          <span class="text-primary">//</span> Role Overview & Responsibilities
+        </h2>
+        <p class="text-base text-muted-foreground leading-relaxed">{exp.description}</p>
+      </section>
+
+      {/* Key Achievements & Impact */}
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold font-mono text-foreground mb-4 flex items-center gap-2">
+          <span class="text-primary">//</span> Key Achievements & Impact
+        </h2>
+        <Card class="border-border/60">
+          <CardContent class="pt-6">
+            <ul class="space-y-4">
+              {exp.achievements.map((achievement, i) => (
+                <li class="flex items-start gap-3">
+                  <CheckCircle2
+                    strokeWidth={1.5}
+                    className="h-5 w-5 text-primary mt-0.5 flex-shrink-0"
+                  />
+                  <div class="flex-1">
+                    <span class="text-sm font-mono font-bold text-primary/60 mr-2">
+                      [{String(i + 1).padStart(2, '0')}]
+                    </span>
+                    <span class="text-sm text-muted-foreground leading-relaxed">
+                      {achievement}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Technologies & Competencies */}
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold font-mono text-foreground mb-4 flex items-center gap-2">
+          <span class="text-primary">//</span> Technologies & Competencies
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {exp.skills.map((skill) => (
+            <div class="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-secondary/50 px-3 py-1.5 text-xs font-mono font-medium text-foreground">
+              <Tag strokeWidth={1.5} className="h-3 w-3 text-primary" />
+              {skill}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Back footer */}
+      <div class="pt-6 border-t border-border/40">
+        <a
+          href="/experience"
+          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-mono group"
+        >
+          <ArrowLeft strokeWidth={1.5} className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
+          Kembali ke Professional Experience
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

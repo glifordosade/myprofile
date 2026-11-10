@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = "Muhammad Zhafarul Maahiy | Portfolio", description = "Portfolio and projects of Muhammad Zhafarul Maahiy — Bachelor of Informatics graduate from Andalas University specializing in Data Science, AI & Software Development." } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<script is:inline>
+			(function() {
+				var stored = localStorage.getItem('theme');
+				if (stored === 'light') {
+					document.documentElement.classList.remove('dark');
+				} else {
+					// Default to dark if no preference or stored === 'dark'
+					var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					if (stored === 'dark' || !stored) {
+						document.documentElement.classList.add('dark');
+					} else if (!prefersDark) {
+						document.documentElement.classList.remove('dark');
+					} else {
+						document.documentElement.classList.add('dark');
+					}
+				}
+			})();
+		</script>
+	</head>
+	<body class="bg-background text-foreground antialiased min-h-screen font-mono selection:bg-primary/25 selection:text-primary-foreground flex flex-col">
+		<div id="top" class="absolute top-0 left-0 -z-50 opacity-0 pointer-events-none" aria-hidden="true"></div>
+		<Navbar client:load currentPath={currentPath} />
+		<main class="flex-1">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

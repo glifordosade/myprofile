@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Button } from '../components/ui/Button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/Card';
+import { Badge } from '../components/ui/Badge';
+import { Input } from '../components/ui/Input';
+import { Textarea } from '../components/ui/Textarea';
+import { ThemeToggle } from '../components/ThemeToggle';
+---
+
+<Layout title="Design System & UI Components | Vega Preview">
+	<div class="max-w-5xl mx-auto px-4 py-24 sm:py-32 space-y-16">
+		<header class="space-y-4 border-b border-border/40 pb-8">
+			<div class="flex items-center gap-3">
+				<Badge variant="primary">Design System v1.0</Badge>
+				<Badge variant="outline">Vega Theme (OKLCH)</Badge>
+			</div>
+			<h1 class="text-4xl font-extrabold tracking-tight font-mono">
+				UI Design System Components
+			</h1>
+			<p class="text-muted-foreground text-base max-w-2xl font-mono">
+				Core components designed for the Zhafa portfolio based on the Vega theme from shadcn with Cascadia Code monospace font and Lucide React icons.
+			</p>
+		</header>
+
+		<!-- Button Variants -->
+		<section class="space-y-6">
+			<h2 class="text-2xl font-bold font-mono border-b border-border/30 pb-2 flex items-center justify-between">
+				<span>Buttons</span>
+				<span class="text-xs font-normal text-muted-foreground">Polymorphic & Flexible</span>
+			</h2>
+			<div class="flex flex-wrap gap-4 items-center">
+				<Button variant="primary">Primary Button</Button>
+				<Button variant="secondary">Secondary</Button>
+				<Button variant="outline">Outline</Button>
+				<Button variant="ghost">Ghost</Button>
+				<Button variant="destructive">Destructive</Button>
+				<Button variant="link">Link Style</Button>
+				<Button variant="primary" disabled>Disabled</Button>
+			</div>
+
+			<div class="flex flex-wrap gap-4 items-center pt-2">
+				<Button size="sm" variant="primary">Small (sm)</Button>
+				<Button size="default" variant="primary">Default (md)</Button>
+				<Button size="lg" variant="primary">Large (lg)</Button>
+				<Button size="icon" variant="outline" aria-label="Icon button">⚡</Button>
+				<Button variant="primary" href="https://github.com" target="_blank" rel="noreferrer">
+					As Link (href)
+				</Button>
+			</div>
+		</section>
+
+		<!-- Badges -->
+		<section class="space-y-6">
+			<h2 class="text-2xl font-bold font-mono border-b border-border/30 pb-2">Badges</h2>
+			<div class="flex flex-wrap gap-3 items-center">
+				<Badge variant="primary">Primary Badge</Badge>
+				<Badge variant="secondary">Secondary Badge</Badge>
+				<Badge variant="outline">Outline Badge</Badge>
+				<Badge variant="muted">Muted Badge</Badge>
+				<Badge variant="destructive">Destructive Badge</Badge>
+			</div>
+		</section>
+
+		<!-- Inputs & Textarea -->
+		<section class="space-y-6">
+			<h2 class="text-2xl font-bold font-mono border-b border-border/30 pb-2">Form Elements</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div class="space-y-2">
+					<label class="text-sm font-medium text-foreground">Email Input</label>
+					<Input type="email" placeholder="user@example.com" />
+					<p class="text-xs text-muted-foreground">Focus ring uses Vega --ring OKLCH token.</p>
+				</div>
+				<div class="space-y-2">
+					<label class="text-sm font-medium text-foreground">Disabled Input</label>
+					<Input disabled placeholder="Disabled field..." />
+					<p class="text-xs text-muted-foreground">Opacity 50% with disabled cursor.</p>
+				</div>
+				<div class="space-y-2 md:col-span-2">
+					<label class="text-sm font-medium text-foreground">Message Textarea</label>
+					<Textarea placeholder="Type your message here..." rows={4} />
+				</div>
+			</div>
+		</section>
+
+		<!-- Cards -->
+		<section class="space-y-6">
+			<h2 class="text-2xl font-bold font-mono border-b border-border/30 pb-2">Cards</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<Card>
+					<CardHeader>
+						<div class="flex items-center justify-between">
+							<Badge variant="primary">Featured Project</Badge>
+							<span class="text-xs text-muted-foreground">2026</span>
+						</div>
+						<CardTitle className="pt-2">Portfolio Platform</CardTitle>
+						<CardDescription>
+							Built with Astro 5, TypeScript, Tailwind CSS v4, and React 19.
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p class="text-sm text-foreground/80 leading-relaxed">
+							Demonstrating the Vega design system with OKLCH tokens, dark-mode first design, and high-contrast typography.
+						</p>
+					</CardContent>
+					<CardFooter class="justify-between">
+						<span class="text-xs text-muted-foreground">Status: Active</span>
+						<Button size="sm" variant="outline">View Details</Button>
+					</CardFooter>
+				</Card>
+
+				<Card>
+					<CardHeader>
+						<div class="flex items-center justify-between">
+							<Badge variant="secondary">Experience</Badge>
+							<span class="text-xs text-muted-foreground">3+ Years</span>
+						</div>
+						<CardTitle className="pt-2">Full-Stack Engineer</CardTitle>
+						<CardDescription>
+							Modern web technologies and scalable system architectures.
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p class="text-sm text-foreground/80 leading-relaxed">
+							Crafting seamless, interactive user experiences with high performance and accessibility in mind.
+						</p>
+					</CardContent>
+					<CardFooter class="justify-between">
+						<span class="text-xs text-muted-foreground">Role: Lead</span>
+						<Button size="sm" variant="primary">Read Story</Button>
+					</CardFooter>
+				</Card>
+			</div>
+		</section>
+
+		<!-- Theme Toggle standalone test -->
+		<section class="space-y-6">
+			<h2 class="text-2xl font-bold font-mono border-b border-border/30 pb-2">Theme Toggle</h2>
+			<div class="flex items-center gap-4">
+				<ThemeToggle client:load />
+				<span class="text-sm text-muted-foreground">
+					Click to toggle between Dark and Light mode. Default is dark.
+				</span>
+			</div>
+		</section>
+	</div>
+</Layout>

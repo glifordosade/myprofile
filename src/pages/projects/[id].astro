@@ -1,0 +1,191 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { PROJECTS } from '@/data/portfolioData';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { ArrowLeft, Calendar, ExternalLink, GitBranch, CheckCircle2, Tag } from 'lucide-react';
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout
+  title={`${project.title} | Muhammad Zhafarul Maahiy`}
+  description={project.synopsis}
+>
+  <div class="min-h-screen pt-24 pb-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Back button */}
+      <div class="mb-8">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-mono group"
+        >
+          <ArrowLeft strokeWidth={1.5} className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
+          Kembali ke Featured Projects
+        </a>
+      </div>
+
+      {/* Header */}
+      <div class="mb-8">
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <Badge variant="muted" class="text-xs">{project.category}</Badge>
+          {project.featured && <Badge variant="primary" class="text-xs">Featured</Badge>}
+          <span class="text-xs text-muted-foreground flex items-center gap-1">
+            <Calendar strokeWidth={1.5} className="h-3 w-3" />
+            {project.date}
+          </span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono text-foreground mb-4 leading-tight">
+          {project.title}
+        </h1>
+        <p class="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl">
+          {project.synopsis}
+        </p>
+
+        {/* Action buttons */}
+        <div class="flex flex-wrap gap-3 mt-6">
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 h-9 px-4 py-2 text-sm font-mono font-medium rounded-[var(--radius-md)] bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 shadow-sm shadow-primary/20 active:scale-[0.98]"
+            >
+              <ExternalLink strokeWidth={1.5} className="h-4 w-4" />
+              Live Demo
+            </a>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 h-9 px-4 py-2 text-sm font-mono font-medium rounded-[var(--radius-md)] border border-border bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-200 active:scale-[0.98]"
+            >
+              <GitBranch strokeWidth={1.5} className="h-4 w-4" />
+              Source Code
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Featured Image */}
+      <div class="mb-12 rounded-xl overflow-hidden border border-border/60 shadow-xl">
+        <img
+          src={project.image}
+          alt={project.title}
+          class="w-full aspect-video object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      {/* Project Overview */}
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold font-mono text-foreground mb-4 flex items-center gap-2">
+          <span class="text-primary">//</span> Project Overview
+        </h2>
+        <p class="text-base text-muted-foreground leading-relaxed">{project.overview}</p>
+      </section>
+
+      {/* Challenges + Solutions */}
+      <section class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Challenges */}
+          <Card class="border-border/60">
+            <CardHeader>
+              <CardTitle class="text-lg flex items-center gap-2">
+                <span class="text-primary">//</span> Key Technical Challenges
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-3">
+                {project.challenges.map((challenge, i) => (
+                  <li class="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
+                    <span class="text-primary font-mono font-bold mt-0.5 select-none flex-shrink-0">
+                      {String(i + 1).padStart(2, '0')}.
+                    </span>
+                    {challenge}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Solutions */}
+          <Card class="border-border/60">
+            <CardHeader>
+              <CardTitle class="text-lg flex items-center gap-2">
+                <span class="text-primary">//</span> Engineered Solutions
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-3">
+                {project.solutions.map((solution, i) => (
+                  <li class="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
+                    <CheckCircle2
+                      strokeWidth={1.5}
+                      className="h-4 w-4 text-primary mt-0.5 flex-shrink-0"
+                    />
+                    {solution}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Measurable Outcomes */}
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold font-mono text-foreground mb-4 flex items-center gap-2">
+          <span class="text-primary">//</span> Measurable Outcomes
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {project.outcomes.map((outcome, i) => (
+            <div class="flex items-start gap-3 p-4 rounded-[var(--radius)] border border-border/50 bg-card/50">
+              <span class="text-2xl font-bold text-primary/30 font-mono select-none leading-none">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <p class="text-sm text-muted-foreground leading-relaxed mt-0.5">{outcome}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Technologies & Tooling */}
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold font-mono text-foreground mb-4 flex items-center gap-2">
+          <span class="text-primary">//</span> Technologies & Tooling
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <div class="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-secondary/50 px-3 py-1.5 text-xs font-mono font-medium text-foreground">
+              <Tag strokeWidth={1.5} className="h-3 w-3 text-primary" />
+              {tech}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Back footer */}
+      <div class="pt-6 border-t border-border/40">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 font-mono group"
+        >
+          <ArrowLeft strokeWidth={1.5} className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
+          Kembali ke Featured Projects
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
